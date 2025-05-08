@@ -5,8 +5,8 @@ import lombok.Getter;
 @Getter
 public abstract class Paginacao {
 
-    private Integer paginaAtual;
-    private Integer itensPagina;
+    private Integer paginaAtual = 1;
+    private Integer itensPagina = 10;
 
     private String[] sort = new String[] { "id", "asc" };
 
