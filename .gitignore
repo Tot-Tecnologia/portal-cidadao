@@ -33,3 +33,5 @@ build/
 .vscode/
 .env
 .env.dev
+firebas-key.json
+.DS_Store
