@@ -1,0 +1,58 @@
+spring:
+  cors:
+    host: ${SPRING_CORS_HOST}
+  application:
+    name: "@project.name@"
+    version: "@project.version@"
+    description: "@project.description@"
+  servlet:
+    multipart:
+      max-file-size: ${SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE}
+      max-request-size: ${SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE}
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    dbName: ${SPRING_DB_NAME}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME}
+    hikari:
+      maximum-pool-size: ${SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE}
+      connection-timeout: ${SPRING_DATASOURCE_HIKARI_CONNECTION_TIMEOUT}
+      idle-timeout: ${SPRING_DATASOURCE_HIKARI_IDLE_TIMEOUT}
+      max-lifetime: ${SPRING_DATASOURCE_HIKARI_MAX_LIFETIME}
+
+  jpa:
+    hibernate:
+      ddl-auto: ${SPRING_JPA_DDL_VALIDATE}
+    show-sql: ${SPRING_JPA_SHOW_SQL}
+    properties:
+      hibernate:
+        dialect: ${SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT}
+        use_sql_comments: true
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+  flyway:
+    enabled: true
+    locations: ${SPRING_FLYWAY_LOCATIONS}
+    baseline-on-migrate: true
+    schemas: public
+    table: flyway_schema_history
+    validate-on-migrate: true
+
+server:
+  servlet:
+    context-path: "/@project.artifactId@"
+
+logging:
+    level:
+      root: INFO
+firebase:
+  pathAccountKey: ${FIREBASE_PATH_ACCOUNT_KEY}
+
+springdoc:
+  swagger-ui.path: /swagger-ui.html
+
