@@ -14,7 +14,7 @@ import br.tec.tot.dardani.portal_cidadao.infrastructure.persistence.repositories
 public interface ProtocoloJpaRepository
         extends JpaRepository<ProtocoloEntity, Long>, JpaSpecificationExecutor<ProtocoloEntity> {
 
-    default Page<ProtocoloEntity> consultarProcolos(ProtocoloFiltrosRequest filtros, Pageable pageable) {
+    default Page<ProtocoloEntity> consultarProtocolos(ProtocoloFiltrosRequest filtros, Pageable pageable) {
         return findAll(ProtocoloSpecifications.consultarProtocolos(filtros), pageable);
     }
 }

@@ -41,7 +41,7 @@ public class ProtocoloRepositoryImpl extends AbstractRepository implements Proto
 
     @Override
     public Page<ProtocoloEntity> buscarProtocolos(ProtocoloFiltrosRequest parametros) {
-        return jpaRepository.consultarProcolos(parametros, parsePaginacao(parametros));
+        return jpaRepository.consultarProtocolos(parametros, parsePaginacao(parametros));
     }
 
     @Override

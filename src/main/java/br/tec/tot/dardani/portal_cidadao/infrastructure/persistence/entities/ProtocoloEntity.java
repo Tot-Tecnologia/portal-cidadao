@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import br.tec.tot.dardani.portal_cidadao.domain.models.ProtocoloStatus;
@@ -33,6 +36,8 @@ import lombok.Setter;
 @Getter
 @Entity
 @NoArgsConstructor
+@FilterDef(name = "proprietario", parameters = { @ParamDef(name = "pessoaId", type = Long.class) })
+@Filter(name = "proprietario", condition = "pessoa_id = :pessoaId")
 @Table(name = "protocolos", indexes = @Index(name = "idx_protocolo_numero", columnList = "numero_protocolo"))
 public class ProtocoloEntity {
 
