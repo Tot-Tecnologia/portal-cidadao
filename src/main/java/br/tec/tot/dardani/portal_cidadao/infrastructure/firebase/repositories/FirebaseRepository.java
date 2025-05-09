@@ -20,7 +20,7 @@ public class FirebaseRepository {
 
             log.debug("Executando criarUsuario ({})", modelo);
             var usuarioRequest = new UserRecord.CreateRequest()
-                    .setUid(modelo.getId().toString())
+                    // .setUid(modelo.getId().toString())
                     .setDisplayName(modelo.getNome())
                     .setEmail(modelo.getLogin())
                     .setEmailVerified(false)
