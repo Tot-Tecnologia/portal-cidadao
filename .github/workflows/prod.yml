@@ -1,0 +1,43 @@
+
+name: Deploy Portal WEB
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Setup Java
+              uses: actions/setup-java@v3
+              with:
+                distribution: 'temurin'
+                java-version: '21'
+            - name: Build project
+              run: mvn clean install -DskipTests
+            - name: Login Docker Hub
+              run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+            - name: Build docker image
+              run: docker build -t eliezertsilva/portal-cidadao .
+            - name: Push image docker
+              run: docker push eliezertsilva/portal-cidadao
+              
+    # deploy:
+    #     needs: build
+    #     runs-on: self-hosted
+    #     steps:
+    #         - name: Pull image from docker hub
+    #           run: docker pull eliezertsilva/portal-cidadao:latest
+    #         - name: Remove docker container
+    #           run: docker rm -f portal-cidadao
+    #         - name: Run docker container
+    #           run: docker run -d -p 8080:8080 \n
+    #              -e SPRING_DATASOURCE_USERNAME=${{secrets.SPRING_DATASOURCE_USERNAME}} \n
+    #              -e SPRING_DATASOURCE_PASSWORD='${{secrets.SPRING_DATASOURCE_PASSWORD}}' \n 
+    #              -e SPRING_DATASOURCE_URL=${{secrets.SPRING_DATASOURCE_URL}} \n 
+    #              -e SPRING_DB_NAME=${{secrets.SPRING_DB_NAME}} \n
+    #              --name portal-cidadao eliezertsilva/portal-cidadao

@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>br.tec.tot.dardani</groupId>
 	<artifactId>portal-cidadao</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>portal-cidadao</name>
 	<description>Demo project for Spring Boot</description>
 	<url />
