@@ -30,11 +30,15 @@ jobs:
         needs: build
         runs-on: self-hosted
         steps:
-            - name: Setup
+            - name: Checkout code
               uses: actions/checkout@v3
+              
+            - name: Maven setup  
               uses: s4u/setup-maven-action@v1
               with:
                 maven-version: '3.9.9'
+
+            - name: Setup JAVA
               uses: actions/setup-java@v3
               with:
                 distribution: 'temurin'
