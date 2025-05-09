@@ -9,11 +9,21 @@ import br.tec.tot.dardani.portal_cidadao.application.domain.Paginacao;
 public abstract class AbstractRepository {
 
     protected Pageable parsePaginacao(Paginacao paginacao) {
-        return PageRequest.of(
-                paginacao.getPaginaAtual(),
-                paginacao.getItensPagina(),
-                parseSort(paginacao.getSort()));
-    }
+            Integer paginaAtual = paginacao.getPaginaAtual();
+            if (paginaAtual == null) {
+                paginaAtual = 1; 
+            }
+                Integer itensPagina = paginacao.getItensPagina();
+            if (itensPagina == null) {
+                itensPagina = 10; 
+            }
+            int offset = (paginaAtual - 1) * itensPagina;
+
+            return PageRequest.of(
+                    paginaAtual - 1,  
+                    itensPagina,
+                    parseSort(paginacao.getSort()));
+        }
 
     private Sort parseSort(String[] sort) {
         if (sort.length >= 2) {
