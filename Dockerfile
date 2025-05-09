@@ -2,6 +2,8 @@ FROM eclipse-temurin:21-jdk-alpine
 
 WORKDIR /app
 
+ARG FIREBASE_ACCOUNT_VALUE
+
 COPY target/portal-cidadao-0.0.1.jar portal-cidadao-0.0.1.jar
 
 RUN echo "$FIREBASE_ACCOUNT_VALUE" > /app/firebase-key.json || echo "Firebase config not set" > /app/firebase-key.json
