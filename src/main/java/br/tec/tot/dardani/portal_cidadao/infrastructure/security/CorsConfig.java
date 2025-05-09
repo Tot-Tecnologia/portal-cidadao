@@ -20,8 +20,7 @@ public class CorsConfig {
                 registry.addMapping("/**")
                         .allowedOrigins(cors)
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                        .allowedHeaders("Authorization", "Content-Type", "Access-Control-Max-Age", "3600",
-                                "Access-Control-Allow-Credentials", "true")
+                        .allowedHeaders("Authorization", "Content-Type")
                         .allowCredentials(true)
                         .maxAge(3600);
             }
