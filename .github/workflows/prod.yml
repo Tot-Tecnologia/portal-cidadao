@@ -47,11 +47,12 @@ jobs:
             - name: Build project
               run: mvn clean install -DskipTests
             - name: Executar migracao
-              run: mvn flyway:migrate \
-                -Dflyway.user=${{secrets.SPRING_DATASOURCE_USERNAME}} \
-                -Dflyway.password=${{secrets.SPRING_DATASOURCE_PASSWORD}} \
-                -Dflyway.schemas=public \
-                -Dflyway.url=jdbc:postgresql://localhost:5432/protocolo_web_dev \
+              run:  >
+                mvn flyway:migrate
+                -Dflyway.user=${{secrets.SPRING_DATASOURCE_USERNAME}}
+                -Dflyway.password=${{secrets.SPRING_DATASOURCE_PASSWORD}}
+                -Dflyway.schemas=public
+                -Dflyway.url=jdbc:postgresql://localhost:5432/protocolo_web_dev
                 -Dflyway.locations=filesystem:src/main/resources/db/migration
 
             - name: Login Docker Hub
@@ -61,9 +62,10 @@ jobs:
             - name: Remove docker container
               run: sudo docker rm -f portal-cidadao
             - name: Run docker container
-              run: sudo docker run -d -p 8080:8080 \
-                  -e SPRING_DATASOURCE_USERNAME=${{secrets.SPRING_DATASOURCE_USERNAME}} \
-                  -e SPRING_DATASOURCE_PASSWORD='${{secrets.SPRING_DATASOURCE_PASSWORD}}' \
-                  -e SPRING_DATASOURCE_URL=${{secrets.SPRING_DATASOURCE_URL}} \ 
-                  -e SPRING_DB_NAME=${{secrets.SPRING_DB_NAME}} \
-                  --name portal-cidadao eliezertsilva/portal-cidadao
+              run: >
+                sudo docker run -d -p 8080:8080
+                -e SPRING_DATASOURCE_USERNAME=${{secrets.SPRING_DATASOURCE_USERNAME}}
+                -e SPRING_DATASOURCE_PASSWORD=${{secrets.SPRING_DATASOURCE_PASSWORD}}
+                -e SPRING_DATASOURCE_URL=${{secrets.SPRING_DATASOURCE_URL}}
+                -e SPRING_DB_NAME=${{secrets.SPRING_DB_NAME}}
+                --name portal-cidadao eliezertsilva/portal-cidadao
