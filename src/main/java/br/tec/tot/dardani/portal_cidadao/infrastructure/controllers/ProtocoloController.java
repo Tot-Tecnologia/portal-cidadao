@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.tec.tot.dardani.portal_cidadao.application.annotations.SessionData;
 import br.tec.tot.dardani.portal_cidadao.application.dtos.request.ProtocoloFiltrosRequest;
 import br.tec.tot.dardani.portal_cidadao.application.dtos.request.ProtocoloRequest;
 import br.tec.tot.dardani.portal_cidadao.application.dtos.response.ConsultaResponse;
@@ -20,6 +21,8 @@ import br.tec.tot.dardani.portal_cidadao.application.dtos.response.ProtocoloFilt
 import br.tec.tot.dardani.portal_cidadao.application.usecases.BuscarProtocoloUseCase;
 import br.tec.tot.dardani.portal_cidadao.application.usecases.BuscarProtocolosUseCase;
 import br.tec.tot.dardani.portal_cidadao.application.usecases.CriarProtocoloUseCase;
+import br.tec.tot.dardani.portal_cidadao.infrastructure.security.model.Sessao;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +38,7 @@ public class ProtocoloController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ProtocoloCriadoResponse> criarProtocolo(
-            @ModelAttribute ProtocoloRequest request) {
+            @ModelAttribute ProtocoloRequest request, @NotNull @SessionData Sessao sessao) {
 
         log.debug("Executando criarProtocolo ({})", request.getNomeSolicitante());
         var protocoloResponse = this.criarProtocoloUseCase.executar(request);

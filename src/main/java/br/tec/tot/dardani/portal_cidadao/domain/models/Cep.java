@@ -4,7 +4,7 @@ import br.tec.tot.dardani.portal_cidadao.domain.exceptions.DomainException;
 import lombok.Getter;
 
 @Getter
-public class Cep {
+public final class Cep {
 
     private final String valor;
 

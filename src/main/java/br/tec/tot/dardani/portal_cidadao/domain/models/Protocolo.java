@@ -7,7 +7,7 @@ import br.tec.tot.dardani.portal_cidadao.domain.exceptions.DomainException;
 import lombok.Getter;
 
 @Getter
-public class Protocolo {
+public final class Protocolo {
 
     private final Long id;
 

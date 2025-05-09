@@ -4,7 +4,7 @@ import br.tec.tot.dardani.portal_cidadao.domain.exceptions.DomainException;
 import lombok.Getter;
 
 @Getter
-public class Localizacao {
+public final class Localizacao {
     private final String logradouro;
     private final String numero;
     private final String bairro;
