@@ -47,7 +47,8 @@ jobs:
             - name: Build project
               run: mvn clean install -DskipTests
             - name: Executar migracao
-              run: mvn flyway:migrate -Dflyway.user=${{secrets.SPRING_DATASOURCE_USERNAME}} \
+              run: mvn flyway:migrate \
+                -Dflyway.user=${{secrets.SPRING_DATASOURCE_USERNAME}} \
                 -Dflyway.password=${{secrets.SPRING_DATASOURCE_PASSWORD}} \
                 -Dflyway.schemas=public \
                 -Dflyway.url=jdbc:postgresql://localhost:5432/protocolo_web_dev \
