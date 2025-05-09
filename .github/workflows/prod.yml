@@ -3,7 +3,7 @@ name: Deploy Portal WEB
 
 on:
     push:
-        branches: [main]
+        branches: [develop]
 
 jobs:
     build:
