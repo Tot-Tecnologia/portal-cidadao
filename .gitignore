@@ -31,7 +31,6 @@ build/
 
 ### VS Code ###
 .env
-.env.dev
 firebase-key.json
 .DS_Store
 env.sh
