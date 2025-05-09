@@ -2,14 +2,14 @@
   "configurations": [
     {
       "type": "java",
-      "name": "Spring Boot-PortalCidadaoApplication<protocolo>",
+      "name": "Spring Boot-PortalCidadaoApplication<portal-cidadao>",
       "request": "launch",
       "cwd": "${workspaceFolder}",
       "mainClass": "br.tec.tot.dardani.portal_cidadao.PortalCidadaoApplication",
-      "projectName": "protocolo",
+      "projectName": "portal-cidadao",
       "args": "",
       "envFile": "${workspaceFolder}/.env",
       "preLaunchTask": "docker-compose-db"
-    },
+    }
   ]
 }
