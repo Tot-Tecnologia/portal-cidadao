@@ -30,4 +30,8 @@ build/
 !**/src/test/**/build/
 
 ### VS Code ###
-.vscode/
+.env
+.env.dev
+firebase-key.json
+.DS_Store
+env.sh

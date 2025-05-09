@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "docker-compose-db",
+        "type": "shell",
+        "command": "docker-compose --env-file .env up -d",
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "problemMatcher": [],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      },
+      {
+        "label": "flyway-migration",
+        "type": "shell",
+        "command": "mvn flyway:migrate -Dflyway.configFiles=myFlywayConfig.conf",
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "dependsOn": ["docker-compose-db"],
+        "problemMatcher": [],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      }
+    ]
+  }
+  

@@ -1,0 +1,15 @@
+{
+    "recommendations": [
+        "ms-azuretools.vscode-docker",
+        "redhat.java",
+        "vscjava.vscode-maven",
+        "vscjava.vscode-spring-boot-dashboard",
+        "vmware.vscode-boot-dev-pack",
+        "vmware.vscode-spring-boot",
+        "vmware.vscode-spring-boot",
+        "vscjava.vscode-spring-initializr",
+        "vscjava.vscode-java-test",
+        "redhat.vscode-xml",
+        "vscjava.vscode-java-dependency"
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "configurations": [
+      {
+        "type": "java",
+        "name": "Spring Boot-PortalApplication<protocolo>",
+        "request": "launch",
+        "cwd": "${workspaceFolder}",
+        "mainClass": "com.tot.portal.PortalApplication",
+        "projectName": "protocolo",
+        "args": "",
+        "envFile": "${workspaceFolder}/.env",
+        "preLaunchTask": "docker-compose-db"
+      },
+      {
+        "type": "java",
+        "name": "Spring Boot-PortalApplication<protocolo>",
+        "request": "launch",
+        "cwd": "${workspaceFolder}",
+        "mainClass": "com.tot.portal.PortalApplication",
+        "projectName": "protocolo",
+        "args": "",
+        "envFile": "${workspaceFolder}/.env"
+      },
+      {
+        "type": "java",
+        "name": "Spring Boot-ProtocoloApplication<protocolo>",
+        "request": "launch",
+        "cwd": "${workspaceFolder}",
+        "mainClass": "com.tot.portal.ProtocoloApplication",
+        "projectName": "protocolo",
+        "args": "",
+        "envFile": "${workspaceFolder}/.env"
+      }
+    ]
+  }
+  
