@@ -6,39 +6,35 @@ on:
         branches: [develop]
 
 jobs:
-    # build:
-    #     runs-on: ubuntu-latest
-    #     steps:
-    #         - name: Checkout code
-    #           uses: actions/checkout@v3
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
 
-    #         - name: Setup Java
-    #           uses: actions/setup-java@v3
-    #           with:
-    #             distribution: 'temurin'
-    #             java-version: '21'
-    #         - name: Build project
-    #           run: mvn clean install -DskipTests
-    #         - name: Login Docker Hub
-    #           run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-    #         - name: Build docker image
-    #           run: docker build -t eliezertsilva/portal-cidadao .
-    #         - name: Push image docker
-    #           run: docker push eliezertsilva/portal-cidadao
+            - name: Setup Java
+              uses: actions/setup-java@v3
+              with:
+                distribution: 'temurin'
+                java-version: '21'
+            - name: Build project
+              run: mvn clean install -DskipTests
+            - name: Login Docker Hub
+              run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+            - name: Build docker image
+              run: docker build -t eliezertsilva/portal-cidadao .
+            - name: Push image docker
+              run: docker push eliezertsilva/portal-cidadao
               
     deploy:
         needs: build
         runs-on: self-hosted
         steps:
-            - name: Checkout code
+            - name: Setup
               uses: actions/checkout@v3
-
-            - name: Setup Maven
               uses: s4u/setup-maven-action@v1
               with:
                 maven-version: '3.9.9'
-
-            - name: Setup Java
               uses: actions/setup-java@v3
               with:
                 distribution: 'temurin'
