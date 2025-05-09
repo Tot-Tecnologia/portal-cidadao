@@ -77,4 +77,4 @@ jobs:
                 -e SPRING_DATASOURCE_PASSWORD=${{secrets.SPRING_DATASOURCE_PASSWORD}}
                 -e SPRING_DATASOURCE_URL=${{secrets.SPRING_DATASOURCE_URL}}
                 -e SPRING_DB_NAME=${{secrets.SPRING_DB_NAME}}
-                --name portal-cidadao eliezertsilva/portal-cidadao
+                --name portal-cidadao eliezertsilva/portal-cidadao:latest
