@@ -19,6 +19,16 @@ jobs:
                 java-version: '21'
             - name: Build project
               run: mvn clean install -DskipTests
+            
+            - name: Create Firebase config JSON from Secret
+              run: |
+                echo '${{ secrets.FIREBASE_ACCOUNT_JSON }}' > /app/firebase-key.json
+
+            - name: View Firebase config (cat the file)
+              run: |
+                echo "Displaying Firebase config:"
+                cat /app/firebase-key.json
+
             - name: Login Docker Hub
               run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
             - name: Build docker image
