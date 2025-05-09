@@ -57,10 +57,16 @@ jobs:
 
             - name: Login Docker Hub
               run: sudo docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-            - name: Pull image from docker hub
-              run: sudo docker pull eliezertsilva/portal-cidadao:latest
+
+            - name: Parar container
+              run: sudo docker stop portal-cidadao
+
             - name: Remove docker container
               run: sudo docker rm -f portal-cidadao
+
+            - name: Pull image from docker hub
+              run: sudo docker pull eliezertsilva/portal-cidadao:latest
+
             - name: Run docker container
               run: >
                 sudo docker run -d -p 8080:8080
