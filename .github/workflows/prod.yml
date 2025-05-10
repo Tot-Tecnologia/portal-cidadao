@@ -85,4 +85,4 @@ jobs:
                 -e FIREBASE_PATH_ACCOUNT_KEY=${{secrets.FIREBASE_PATH_ACCOUNT_KEY}}
                 -e SPRING_DATASOURCE_URL=${{secrets.SPRING_DATASOURCE_URL}}
                 -e SPRING_DB_NAME=${{secrets.SPRING_DB_NAME}}
-                --name portal-cidadao eliezertsilva/portal-cidadao:latest 
+                --name portal-cidadao eliezertsilva/portal-cidadao:latest  
