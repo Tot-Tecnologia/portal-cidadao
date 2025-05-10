@@ -15,7 +15,7 @@ jobs:
               uses: actions/checkout@v3
 
             - name: Build project
-              run: mvn package -DskipTests
+              run: mvn install -DskipTests
 
             - name: Firebase Conf
               run: echo '${{ secrets.FIREBASE_ACCOUNT_VALUE }}' > firebase-key.json
