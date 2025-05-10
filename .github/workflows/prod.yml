@@ -20,7 +20,7 @@ jobs:
             - name: Firebase Conf
               run: echo '${{ secrets.FIREBASE_ACCOUNT_VALUE }}' > firebase-key.json
 
-            - name: Executar migracao
+            - name: Executar migracao 
               run:  >
                 mvn flyway:migrate
                 -Dflyway.user=${{secrets.SPRING_DATASOURCE_USERNAME}}
