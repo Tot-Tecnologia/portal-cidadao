@@ -5,38 +5,14 @@ on:
     push:
         branches: [develop]
 
-jobs:
-    build:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout code
-              uses: actions/checkout@v3
-
-            - name: Setup Java
-              uses: actions/setup-java@v3
-              with:
-                distribution: 'temurin'
-                java-version: '21'
-            
-            - name: Build project
-              run: mvn clean install -DskipTests
-            
-            - name: Create Firebase config JSON from Secret
-              run: echo '${{ secrets.FIREBASE_ACCOUNT_VALUE }}' > firebase-key.json
-            
-            - name: Login Docker Hub
-              run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-            
-            - name: Build docker image
-              run: docker build -t eliezertsilva/portal-cidadao .
-            
-            - name: Push image docker
-              run: docker push eliezertsilva/portal-cidadao
-              
+jobs:           
     deploy:
         needs: build
         runs-on: self-hosted
         steps:
+            - name: Excluir codigo antigo
+              run: rm -Rf ./portal-cidadao || true
+
             - name: Checkout code
               uses: actions/checkout@v3
               
@@ -53,37 +29,23 @@ jobs:
 
             - name: Build project
               run: mvn clean install -DskipTests
+
             - name: Executar migracao
               run:  >
                 mvn flyway:migrate
                 -Dflyway.user=${{secrets.SPRING_DATASOURCE_USERNAME}}
                 -Dflyway.password=${{secrets.SPRING_DATASOURCE_PASSWORD}}
                 -Dflyway.schemas=public
-                -Dflyway.url=jdbc:postgresql://localhost:5432/protocolo_web_dev
+                -Dflyway.url=${{secrets.SPRING_DATASOURCE_URL}}
                 -Dflyway.locations=filesystem:src/main/resources/db/migration
 
-            - name: Login Docker Hub
-              run: sudo docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
-
-            - name: Parar container
-              run: sudo docker stop portal-cidadao || true
-
-            - name: Remove docker container
-              run: sudo docker rm -f portal-cidadao || true
-            
-            - name: Remove docker container
-              run: sudo docker rmi -f eliezertsilva/portal-cidadao || true
-
-            - name: Pull image from docker hub
-              run: sudo docker pull eliezertsilva/portal-cidadao:latest
-
-            - name: Run docker container
+            - name: Run JAR
               run: >
-                sudo docker run -d -p 8080:8080
-                -e SPRING_DATASOURCE_USERNAME=${{secrets.SPRING_DATASOURCE_USERNAME}}
-                -e SPRING_DATASOURCE_PASSWORD=${{secrets.SPRING_DATASOURCE_PASSWORD}}
-                -e FIREBASE_PATH_ACCOUNT_KEY=${{secrets.FIREBASE_PATH_ACCOUNT_KEY}}
-                -e SPRING_CORS_HOST=${{secrets.SPRING_CORS_HOST}}
-                -e SPRING_DATASOURCE_URL=${{secrets.SPRING_DATASOURCE_URL}}
-                -e SPRING_DB_NAME=${{secrets.SPRING_DB_NAME}}
-                --name portal-cidadao eliezertsilva/portal-cidadao:latest  
+                java
+                  -DSPRING_DATASOURCE_USERNAME=${{secrets.SPRING_DATASOURCE_USERNAME}}
+                  -DSPRING_DATASOURCE_PASSWORD=${{secrets.SPRING_DATASOURCE_PASSWORD}}
+                  -DFIREBASE_PATH_ACCOUNT_KEY=${{secrets.FIREBASE_PATH_ACCOUNT_KEY}}
+                  -DSPRING_CORS_HOST=${{secrets.SPRING_CORS_HOST}}
+                  -DSPRING_DATASOURCE_URL=${{secrets.SPRING_DATASOURCE_URL}}
+                  -DSPRING_DB_NAME=${{secrets.SPRING_DB_NAME}}
+                  -jar target/portal-cidadao-0.0.1.jar
