@@ -17,22 +17,20 @@ jobs:
               with:
                 distribution: 'temurin'
                 java-version: '21'
+            
             - name: Build project
               run: mvn clean install -DskipTests
             
             - name: Create Firebase config JSON from Secret
               run: |
-                echo '${{ secrets.FIREBASE_ACCOUNT_VALUE }}' > /app/firebase-key.json
-
-            - name: View Firebase config (cat the file)
-              run: |
-                echo "Displaying Firebase config:"
-                cat /app/firebase-key.json
-
+                echo '${{ secrets.FIREBASE_ACCOUNT_VALUE }}' > firebase-key.json
+            
             - name: Login Docker Hub
               run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
+            
             - name: Build docker image
-              run: docker build --build-arg FIREBASE_ACCOUNT_VALUE='${{secrets.FIREBASE_ACCOUNT_VALUE}}' -t eliezertsilva/portal-cidadao .
+              run: docker build -t eliezertsilva/portal-cidadao .
+            
             - name: Push image docker
               run: docker push eliezertsilva/portal-cidadao
               
