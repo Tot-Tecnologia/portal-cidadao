@@ -10,9 +10,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
+
 import br.tec.tot.dardani.portal_cidadao.domain.exceptions.ApiException;
 import br.tec.tot.dardani.portal_cidadao.infrastructure.security.model.Sessao;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,8 +34,7 @@ public class FirebaseSecurityFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getRequestURI();
-        var whiteList = WHITE_LIST.contains(path);
-        return whiteList || "OPTIONS".equals(request.getMethod());
+        return WHITE_LIST.contains(path);
     }
 
     @Override

@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Repository;
 
 import br.tec.tot.dardani.portal_cidadao.application.dtos.request.ProtocoloFiltrosRequest;
-import br.tec.tot.dardani.portal_cidadao.domain.exceptions.ApiException;
 import br.tec.tot.dardani.portal_cidadao.domain.models.Protocolo;
 import br.tec.tot.dardani.portal_cidadao.domain.repositories.ProtocoloRepository;
 import br.tec.tot.dardani.portal_cidadao.infrastructure.persistence.entities.ProtocoloEntity;
@@ -24,7 +23,7 @@ public class ProtocoloRepositoryImpl extends AbstractRepository implements Proto
 
     private final ProtocoloMapper mapper;
     private final ProtocoloJpaRepository jpaRepository;
-    private final SessaoDataService service;
+    private final SessaoDataService sessao;
 
     @Override
     public Protocolo salvar(Protocolo modelo) {
@@ -32,10 +31,13 @@ public class ProtocoloRepositoryImpl extends AbstractRepository implements Proto
         log.debug("Executando salvar ({})", modelo.getNomeSolicitante());
 
         var entidade = mapper.toEntity(modelo);
-        var pessoa = service.getPessoa().orElseThrow(() -> new ApiException("Usuário não encontrado."));
-        entidade.setPessoa(pessoa);
+
+        entidade.setPessoa(sessao.getProprietario());
+
         jpaRepository.save(entidade);
+
         log.info("Protocolo salvo no DB");
+
         return mapper.toModel(entidade);
     }
 
@@ -45,8 +47,8 @@ public class ProtocoloRepositoryImpl extends AbstractRepository implements Proto
     }
 
     @Override
-    public Optional<ProtocoloEntity> buscarProtocoloPorId(Long id) {
-        return jpaRepository.findById(id);
+    public Optional<ProtocoloEntity> buscarProtocoloPorNumero(String numeroProtocolo) {
+        return jpaRepository.findByNumeroProtocolo(numeroProtocolo);
     }
 
 }

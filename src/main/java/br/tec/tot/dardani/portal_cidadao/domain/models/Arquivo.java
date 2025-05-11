@@ -3,7 +3,11 @@ package br.tec.tot.dardani.portal_cidadao.domain.models;
 import java.util.Arrays;
 
 import br.tec.tot.dardani.portal_cidadao.domain.exceptions.DomainException;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
+@Getter
+@EqualsAndHashCode
 public final class Arquivo {
 
     private static final String PDF_MIME_TYPE = "application/pdf";
@@ -17,17 +21,29 @@ public final class Arquivo {
     private final String mimeType;
     private final byte[] conteudo;
     private final Long tamanho;
+    private final TipoArquivoEnum tipoArquivo;
 
-    private Arquivo(Long id, String nomeOriginal, String mimeType, byte[] conteudo, Long tamanho) {
+    private Arquivo(Long id, String nomeOriginal, String mimeType, byte[] conteudo, Long tamanho,
+            TipoArquivoEnum tipoArquivo) {
         this.id = id;
         this.nomeOriginal = validarNomeOriginal(nomeOriginal);
         this.mimeType = validarMimeType(mimeType);
         this.conteudo = validarConteudo(conteudo);
         this.tamanho = validarTamanho(tamanho);
+        this.tipoArquivo = validarTipoArquivo(tipoArquivo);
     }
 
-    public static Arquivo criar(Long id, String nomeOriginal, String mimeType, byte[] conteudo, Long tamanho) {
-        return new Arquivo(id, nomeOriginal, mimeType, conteudo, tamanho);
+    public static Arquivo criar(Long id, String nomeOriginal, String mimeType, byte[] conteudo, Long tamanho,
+            TipoArquivoEnum tipoArquivo) {
+        return new Arquivo(id, nomeOriginal, mimeType, conteudo, tamanho, tipoArquivo);
+    }
+
+    private TipoArquivoEnum validarTipoArquivo(TipoArquivoEnum tipoArquivo) {
+        if (tipoArquivo == null) {
+            throw new DomainException("Tipo do arquivo é obrigátorio");
+        }
+
+        return tipoArquivo;
     }
 
     private String validarNomeOriginal(String nomeOriginal) {
@@ -61,23 +77,8 @@ public final class Arquivo {
         return tamanho;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getNomeOriginal() {
-        return nomeOriginal;
-    }
-
-    public String getMimeType() {
-        return mimeType;
-    }
-
     public byte[] getConteudo() {
         return Arrays.copyOf(conteudo, conteudo.length);
     }
 
-    public Long getTamanho() {
-        return tamanho;
-    }
 }

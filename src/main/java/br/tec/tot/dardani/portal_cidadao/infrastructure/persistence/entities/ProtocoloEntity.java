@@ -85,4 +85,12 @@ public class ProtocoloEntity {
     @JoinColumn(name = "pessoa_id", nullable = false)
     private PessoaEntity pessoa;
 
+    public List<ArquivoEntity> getArquivos() {
+        if (arquivos == null) {
+            return List.of();
+        }
+
+        return arquivos;
+    }
+
 }

@@ -43,10 +43,10 @@ public class ProtocoloController {
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(protocoloResponse.id())
+                .buildAndExpand(protocoloResponse.getId())
                 .toUri();
 
-        log.info("Protocolo criado com sucesso : {}", protocoloResponse.id());
+        log.info("Protocolo criado com sucesso : {}", protocoloResponse.getId());
 
         return ResponseEntity.created(location).body(protocoloResponse);
     }
@@ -60,9 +60,9 @@ public class ProtocoloController {
 
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ProtocoloCriadoResponse> buscarProtocoloPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(buscarProtocoloUseCase.executar(id));
+    @GetMapping("/{numeroProtocolo}")
+    public ResponseEntity<ProtocoloCriadoResponse> buscarProtocoloPorId(@PathVariable String numeroProtocolo) {
+        return ResponseEntity.ok(buscarProtocoloUseCase.executar(numeroProtocolo));
     }
 
 }

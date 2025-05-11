@@ -17,16 +17,16 @@ public final class Cep {
             throw new DomainException("CEP não pode ser nulo ou vazio");
         }
 
-        String cepTrimmed = cep.trim();
+        String cepNumerico = cep.replaceAll("[^0-9]", "");
 
-        if (cepTrimmed.length() != 8) {
+        if (cep.contains("-") && !cep.matches("^\\d{5}-\\d{3}$")) {
+            throw new DomainException("Formato de CEP inválido. Use o padrão 12345-678");
+        }
+
+        if (cepNumerico.length() != 8) {
             throw new DomainException("CEP deve conter 8 dígitos");
         }
 
-        if (!cepTrimmed.matches("^[0-9]{8}$")) {
-            throw new DomainException("CEP deve conter apenas números");
-        }
-
-        return cepTrimmed;
+        return cepNumerico;
     }
 }

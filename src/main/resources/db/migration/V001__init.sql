@@ -40,6 +40,7 @@ CREATE TABLE protocolos (
     tipo_documento BIGINT NOT NULL,
     criado_em TIMESTAMP(6),
     atualizado_em TIMESTAMP(6),
+    pessoa_id BIGINT NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -50,12 +51,20 @@ CREATE TABLE arquivos (
     mime_type VARCHAR(100) NOT NULL,
     tamanho BIGINT NOT NULL,
     conteudo BYTEA NOT NULL,
+    tipo_arquivo VARCHAR(20) NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE UNIQUE INDEX idx_protocolo_numero ON protocolos (numero_protocolo);
 CREATE UNIQUE INDEX idx_pessoa_email ON pessoas (contato_email);
 CREATE UNIQUE INDEX idx_pessoa_documento ON pessoas (documento) WHERE documento IS NOT NULL;
+
+ALTER TABLE protocolos 
+    ADD CONSTRAINT FK_protocolos_pessoas 
+    FOREIGN KEY (pessoa_id) 
+    REFERENCES pessoas (id);
+
+CREATE INDEX idx_protocolos_pessoa ON protocolos (pessoa_id);
 
 ALTER TABLE usuarios 
     ADD CONSTRAINT FK_usuarios_pessoas 

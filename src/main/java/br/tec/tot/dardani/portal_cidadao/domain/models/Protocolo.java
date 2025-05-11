@@ -2,6 +2,7 @@ package br.tec.tot.dardani.portal_cidadao.domain.models;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import br.tec.tot.dardani.portal_cidadao.domain.exceptions.DomainException;
 import lombok.Getter;
@@ -41,6 +42,13 @@ public final class Protocolo {
         this.cpfCnpj = validarCpfCnpj(cpfCnpj);
         this.tipoDocumento = tipoDocumento;
         this.status = status;
+    }
+
+    public Collection<Arquivo> getArquivos() {
+        if (this.arquivos == null) {
+            return List.of();
+        }
+        return this.arquivos;
     }
 
     public void adicionarArquivo(Arquivo arquivo) {

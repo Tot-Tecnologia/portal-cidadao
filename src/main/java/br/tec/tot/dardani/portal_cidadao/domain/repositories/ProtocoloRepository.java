@@ -14,6 +14,6 @@ public interface ProtocoloRepository {
 
     Page<ProtocoloEntity> buscarProtocolos(ProtocoloFiltrosRequest parametros);
 
-    Optional<ProtocoloEntity> buscarProtocoloPorId(Long id);
+    Optional<ProtocoloEntity> buscarProtocoloPorNumero(String numeroProtocolo);
 
 }

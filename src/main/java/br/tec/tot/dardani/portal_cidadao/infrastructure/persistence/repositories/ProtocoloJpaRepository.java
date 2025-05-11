@@ -18,8 +18,8 @@ import br.tec.tot.dardani.portal_cidadao.infrastructure.persistence.repositories
 public interface ProtocoloJpaRepository
         extends JpaRepository<ProtocoloEntity, Long>, JpaSpecificationExecutor<ProtocoloEntity> {
 
-    @Query("SELECT p FROM ProtocoloEntity p WHERE p.id = :id")
-    Optional<ProtocoloEntity> findById(@Param("id") Long id);
+    @Query("SELECT p FROM ProtocoloEntity p WHERE p.numeroProtocolo = :numeroProtocolo")
+    Optional<ProtocoloEntity> findByNumeroProtocolo(@Param("numeroProtocolo") String numeroProtocolo);
 
     default Page<ProtocoloEntity> consultarProtocolos(ProtocoloFiltrosRequest filtros, Pageable pageable) {
         return findAll(ProtocoloSpecifications.consultarProtocolos(filtros), pageable);

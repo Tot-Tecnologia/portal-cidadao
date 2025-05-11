@@ -13,6 +13,6 @@ public interface ProtocoloGateway {
 
     ConsultaResponse<ProtocoloFiltroResponse> buscarProtocolos(ProtocoloFiltrosRequest parametros);
 
-    Optional<Protocolo> buscarProtocoloPorId(Long id);
+    Optional<Protocolo> buscarProtocoloPorId(String numeroProtocolo);
 
 }

@@ -42,8 +42,8 @@ public class ProtocoloGatewayImpl implements ProtocoloGateway {
     }
 
     @Override
-    public Optional<Protocolo> buscarProtocoloPorId(Long id) {
-        return this.repository.buscarProtocoloPorId(id).map(mapper::toModel);
+    public Optional<Protocolo> buscarProtocoloPorId(String numeroProtocolo) {
+        return this.repository.buscarProtocoloPorNumero(numeroProtocolo).map(mapper::toModel);
     }
 
 }
