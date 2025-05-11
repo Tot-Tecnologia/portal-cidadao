@@ -25,16 +25,12 @@ public class FirebaseSecurityFilter extends OncePerRequestFilter {
     private static final String BEARER_PREFIX = "Bearer ";
 
     private static final Set<String> WHITE_LIST = Set.of(
-            "/portal-cidadao/v3/api-docs",
-            "/portal-cidadao/auth/registrar",
-            "/portal-cidadao/swagger-ui/index.html",
-            "/portal-cidadao/v3/api-docs/swagger-config",
-            "/portal-cidadao/swagger-ui/swagger-initializer.js");
+            "/portal-cidadao/auth/registrar");
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getRequestURI();
-        return WHITE_LIST.contains(path);
+        return WHITE_LIST.contains(path) || path.startsWith("/portal-cidadao/swagger-ui");
     }
 
     @Override
