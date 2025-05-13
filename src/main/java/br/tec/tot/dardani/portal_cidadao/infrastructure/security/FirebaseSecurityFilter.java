@@ -30,7 +30,9 @@ public class FirebaseSecurityFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getRequestURI();
-        return WHITE_LIST.contains(path) || path.startsWith("/portal-cidadao/swagger-ui");
+        return WHITE_LIST.contains(path)
+                || path.startsWith("/portal-cidadao/swagger-ui")
+                || path.startsWith("/portal-cidadao/v3/api-docs");
     }
 
     @Override
