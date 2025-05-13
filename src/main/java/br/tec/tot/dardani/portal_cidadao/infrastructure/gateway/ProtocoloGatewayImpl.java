@@ -36,6 +36,7 @@ public class ProtocoloGatewayImpl implements ProtocoloGateway {
                 protocolo.getNumeroProtocolo(),
                 protocolo.getTipoDocumento(),
                 protocolo.getCriadoEm(),
+                protocolo.getStatus().name(),
                 protocolo.getStatus().getDescricao()));
 
         return ConsultaResponse.of(pageResponse);
