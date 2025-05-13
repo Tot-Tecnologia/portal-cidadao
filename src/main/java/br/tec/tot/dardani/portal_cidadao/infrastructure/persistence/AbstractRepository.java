@@ -9,21 +9,12 @@ import br.tec.tot.dardani.portal_cidadao.application.domain.Paginacao;
 public abstract class AbstractRepository {
 
     protected Pageable parsePaginacao(Paginacao paginacao) {
-            Integer paginaAtual = paginacao.getPaginaAtual();
-            if (paginaAtual == null) {
-                paginaAtual = 1; // ou qualquer valor padrão que faça sentido
-            }
-                Integer itensPagina = paginacao.getItensPagina();
-            if (itensPagina == null) {
-                itensPagina = 10; // valor padrão
-            }
-            int offset = (paginaAtual - 1) * itensPagina;
 
-            return PageRequest.of(
-                    paginaAtual - 1,  // A página no PageRequest é 0-indexed
-                    itensPagina,
-                    parseSort(paginacao.getSort()));
-        }
+        return PageRequest.of(
+                paginacao.getPaginaAtual(),
+                paginacao.getItensPagina(),
+                parseSort(paginacao.getSort()));
+    }
 
     private Sort parseSort(String[] sort) {
         if (sort.length >= 2) {

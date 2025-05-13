@@ -6,7 +6,7 @@ import br.tec.tot.dardani.portal_cidadao.domain.exceptions.DomainException;
 import lombok.Getter;
 
 @Getter
-public class CidadeEstado {
+public final class CidadeEstado {
     private final String cidade;
     private final String estado;
 

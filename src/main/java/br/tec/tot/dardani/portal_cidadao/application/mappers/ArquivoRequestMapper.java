@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import br.tec.tot.dardani.portal_cidadao.domain.exceptions.DomainException;
 import br.tec.tot.dardani.portal_cidadao.domain.models.Arquivo;
+import br.tec.tot.dardani.portal_cidadao.domain.models.TipoArquivoEnum;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -21,7 +22,8 @@ public class ArquivoRequestMapper {
                     arquivo.getOriginalFilename(),
                     arquivo.getContentType(),
                     arquivo.getBytes(),
-                    arquivo.getSize());
+                    arquivo.getSize(),
+                    TipoArquivoEnum.DOCUMENTO);
             log.info("Arquivo mapeado e validado");
             return dominio;
         } catch (IOException e) {

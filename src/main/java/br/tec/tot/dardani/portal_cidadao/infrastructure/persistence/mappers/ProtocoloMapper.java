@@ -83,10 +83,6 @@ public class ProtocoloMapper {
                 entidade.getStatus(),
                 entidade.getTipoDocumento());
 
-        if (entidade.getArquivos() == null) {
-            entidade.setArquivos(List.of());
-        }
-
         entidade.getArquivos().stream().map(arquivoMapper::toModel).forEach(protocolo::adicionarArquivo);
 
         return protocolo;

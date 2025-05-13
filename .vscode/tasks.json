@@ -14,20 +14,6 @@
           "isDefault": true
         }
       },
-      {
-        "label": "flyway-migration",
-        "type": "shell",
-        "command": "mvn flyway:migrate -Dflyway.configFiles=myFlywayConfig.conf",
-        "options": {
-          "cwd": "${workspaceFolder}"
-        },
-        "dependsOn": ["docker-compose-db"],
-        "problemMatcher": [],
-        "group": {
-          "kind": "build",
-          "isDefault": true
-        }
-      }
     ]
   }
   
