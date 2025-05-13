@@ -1,20 +1,15 @@
 package br.tec.tot.dardani.portal_cidadao.application.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public abstract class Paginacao {
 
-    private Integer paginaAtual;
-    private Integer itensPagina;
-    private String[] sort;
+    private Integer paginaAtual = 0;
+    private Integer itensPagina = 10;
 
-    public int getPaginaAtual() {
-        return paginaAtual != null ? paginaAtual : 1;
-    }
+    private String[] sort = new String[] { "id", "asc" };
 
-    public int getItensPagina() {
-        return itensPagina != null ? itensPagina : 10;
-    }
-
-    public String[] getSort() {
-        return sort != null ? sort : new String[]{"id", "asc"};
-    }
 }

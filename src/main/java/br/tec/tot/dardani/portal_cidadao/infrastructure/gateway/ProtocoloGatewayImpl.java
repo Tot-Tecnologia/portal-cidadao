@@ -36,14 +36,15 @@ public class ProtocoloGatewayImpl implements ProtocoloGateway {
                 protocolo.getNumeroProtocolo(),
                 protocolo.getTipoDocumento(),
                 protocolo.getCriadoEm(),
+                protocolo.getStatus().name(),
                 protocolo.getStatus().getDescricao()));
 
         return ConsultaResponse.of(pageResponse);
     }
 
     @Override
-    public Optional<Protocolo> buscarProtocoloPorId(Long id) {
-        return this.repository.buscarProtocoloPorId(id).map(mapper::toModel);
+    public Optional<Protocolo> buscarProtocoloPorId(String numeroProtocolo) {
+        return this.repository.buscarProtocoloPorNumero(numeroProtocolo).map(mapper::toModel);
     }
 
 }

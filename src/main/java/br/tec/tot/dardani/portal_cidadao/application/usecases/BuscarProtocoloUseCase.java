@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 import br.tec.tot.dardani.portal_cidadao.application.dtos.response.ProtocoloCriadoResponse;
 import br.tec.tot.dardani.portal_cidadao.application.gateway.ProtocoloGateway;
-import br.tec.tot.dardani.portal_cidadao.application.mappers.ProtocoloApplicationMapper;
 import br.tec.tot.dardani.portal_cidadao.domain.exceptions.ApiException;
 import lombok.RequiredArgsConstructor;
 
@@ -14,11 +13,10 @@ import lombok.RequiredArgsConstructor;
 public class BuscarProtocoloUseCase {
 
     private final ProtocoloGateway gateway;
-    private final ProtocoloApplicationMapper mapper;
 
-    public ProtocoloCriadoResponse executar(Long id) {
-        return gateway.buscarProtocoloPorId(id)
-                .map(mapper::toResponse)
+    public ProtocoloCriadoResponse executar(String numeroProtocolo) {
+        return gateway.buscarProtocoloPorId(numeroProtocolo)
+                .map(ProtocoloCriadoResponse::fromModel)
                 .orElseThrow(() -> new ApiException("Protocolo não encontrado", HttpStatus.NOT_FOUND));
     }
 

@@ -1,6 +1,7 @@
 package br.tec.tot.dardani.portal_cidadao.application.dtos.request;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,4 +31,11 @@ public class ProtocoloRequest {
     private String cidade;
     private Long tipoDocumento;
     private Collection<MultipartFile> arquivos;
+
+    public Collection<MultipartFile> getArquivos() {
+        if (arquivos == null) {
+            return List.of();
+        }
+        return arquivos;
+    }
 }

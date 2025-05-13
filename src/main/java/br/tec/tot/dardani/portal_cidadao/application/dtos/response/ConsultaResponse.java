@@ -14,6 +14,7 @@ public class ConsultaResponse<T> {
     private Collection<T> data;
     private int paginaAtual;
     private int itensPagina;
+    private int totalPaginas;
     private boolean proximaPagina;
     private boolean paginaAnterior;
     private boolean ultimaPagina;
@@ -25,6 +26,7 @@ public class ConsultaResponse<T> {
                 .data(data.getContent())
                 .paginaAtual(data.getNumber())
                 .itensPagina(data.getSize())
+                .totalPaginas(data.getTotalPages())
                 .proximaPagina(data.hasNext())
                 .paginaAnterior(data.hasPrevious())
                 .ultimaPagina(data.isLast())

@@ -12,7 +12,7 @@ import br.tec.tot.dardani.portal_cidadao.domain.repositories.ProtocoloRepository
 import br.tec.tot.dardani.portal_cidadao.infrastructure.persistence.entities.ProtocoloEntity;
 import br.tec.tot.dardani.portal_cidadao.infrastructure.persistence.mappers.ProtocoloMapper;
 import br.tec.tot.dardani.portal_cidadao.infrastructure.persistence.repositories.ProtocoloJpaRepository;
-
+import br.tec.tot.dardani.portal_cidadao.infrastructure.service.SessaoDataService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,24 +23,32 @@ public class ProtocoloRepositoryImpl extends AbstractRepository implements Proto
 
     private final ProtocoloMapper mapper;
     private final ProtocoloJpaRepository jpaRepository;
+    private final SessaoDataService sessao;
 
     @Override
     public Protocolo salvar(Protocolo modelo) {
+
         log.debug("Executando salvar ({})", modelo.getNomeSolicitante());
+
         var entidade = mapper.toEntity(modelo);
+
+        entidade.setPessoa(sessao.getProprietario());
+
         jpaRepository.save(entidade);
+
         log.info("Protocolo salvo no DB");
+
         return mapper.toModel(entidade);
     }
 
     @Override
     public Page<ProtocoloEntity> buscarProtocolos(ProtocoloFiltrosRequest parametros) {
-        return jpaRepository.consultarProcolos(parametros, parsePaginacao(parametros));
+        return jpaRepository.consultarProtocolos(parametros, parsePaginacao(parametros));
     }
 
     @Override
-    public Optional<ProtocoloEntity> buscarProtocoloPorId(Long id) {
-        return jpaRepository.findById(id);
+    public Optional<ProtocoloEntity> buscarProtocoloPorNumero(String numeroProtocolo) {
+        return jpaRepository.findByNumeroProtocolo(numeroProtocolo);
     }
 
 }

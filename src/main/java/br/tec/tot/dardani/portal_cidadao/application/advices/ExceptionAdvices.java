@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import br.tec.tot.dardani.portal_cidadao.application.dtos.response.RespostaPadrao;
 import br.tec.tot.dardani.portal_cidadao.domain.exceptions.ApiException;
@@ -37,5 +38,14 @@ public class ExceptionAdvices {
         log.error("Falha na requisicao", ex);
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR.value()).body(response);
+    }
+
+    @ExceptionHandler(exception = MaxUploadSizeExceededException.class)
+    public ResponseEntity<RespostaPadrao> maxUploadSizeExceededException(MaxUploadSizeExceededException ex) {
+        var response = new RespostaPadrao(400, "Os arquivos selecionados excederam o tamanho máximo permitido.",
+                HttpStatus.BAD_REQUEST.name(), LocalDateTime.now());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST.value()).body(response);
+
     }
 }

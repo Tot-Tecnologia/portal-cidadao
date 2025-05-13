@@ -3,9 +3,12 @@ package br.tec.tot.dardani.portal_cidadao.infrastructure.persistence.entities;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import br.tec.tot.dardani.portal_cidadao.domain.models.TipoArquivoEnum;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,6 +42,10 @@ public class ArquivoEntity {
 
     @Column(nullable = false)
     private Long tamanho;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_arquivo", nullable = false)
+    private TipoArquivoEnum tipoArquivo;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "protocolo_id")

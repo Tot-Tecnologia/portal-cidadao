@@ -4,6 +4,6 @@ import java.time.LocalDateTime;
 
 public record ProtocoloFiltroResponse(Long id, String numeroProtocolo, Long tipoDocumento,
                 LocalDateTime dataSolicitacao,
-                String status) {
+                String statusEnum, String statusTexto) {
 
 }
