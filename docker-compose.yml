@@ -4,9 +4,9 @@ services:
     container_name: protocolo-dev-db
     restart: unless-stopped
     environment:
-      - POSTGRES_USER=${SPRING_DATASOURCE_USERNAME}
-      - POSTGRES_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
-      - POSTGRES_DB=${SPRING_DB_NAME}
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=dev
+      - POSTGRES_DB=protocolo_web_dev
       - PGDATA=/var/lib/postgresql/data/pgdata
     ports:
       - "5432:5432"
