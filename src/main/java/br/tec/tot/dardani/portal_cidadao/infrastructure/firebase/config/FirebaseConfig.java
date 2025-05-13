@@ -22,6 +22,7 @@ public class FirebaseConfig {
     @PostConstruct
     public void initialization() {
         try {
+            log.info("PATH {}", serviceAccountPath);
             FileInputStream serviceAccount = new FileInputStream(serviceAccountPath);
 
             FirebaseOptions options = FirebaseOptions.builder()
