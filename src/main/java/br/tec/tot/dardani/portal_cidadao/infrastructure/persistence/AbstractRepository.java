@@ -9,6 +9,7 @@ import br.tec.tot.dardani.portal_cidadao.application.domain.Paginacao;
 public abstract class AbstractRepository {
 
     protected Pageable parsePaginacao(Paginacao paginacao) {
+
         return PageRequest.of(
                 paginacao.getPaginaAtual(),
                 paginacao.getItensPagina(),
