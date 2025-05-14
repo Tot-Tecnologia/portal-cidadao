@@ -11,7 +11,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 
-import br.tec.tot.dardani.portal_cidadao.domain.exceptions.ApiException;
 import br.tec.tot.dardani.portal_cidadao.infrastructure.security.model.Sessao;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -42,7 +41,7 @@ public class FirebaseSecurityFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader(AUTH_HEADER);
 
         if (authHeader == null || !authHeader.startsWith(BEARER_PREFIX)) {
-            throw new ApiException("Token não informado", HttpStatus.UNAUTHORIZED);
+            response.sendError(HttpStatus.UNAUTHORIZED.value(), "Token não informado");
         }
 
         try {
@@ -53,7 +52,7 @@ public class FirebaseSecurityFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
 
         } catch (FirebaseAuthException e) {
-            throw new ApiException("Token inválido", HttpStatus.UNAUTHORIZED);
+            response.sendError(HttpStatus.UNAUTHORIZED.value(), "Token inválido");
         }
     }
 }
