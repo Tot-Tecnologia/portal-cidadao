@@ -19,9 +19,9 @@ public class CriarProtocoloUseCase {
     public ProtocoloCriadoResponse executar(ProtocoloRequest request) {
         Protocolo protocolo = mapper.toDomain(request);
 
-        Protocolo novoProtocolo = protocoloGateway.criarProtocolo(protocolo);
+        protocolo = protocoloGateway.criarProtocolo(protocolo);
 
-        return ProtocoloCriadoResponse.fromModel(novoProtocolo);
+        return ProtocoloCriadoResponse.fromModel(protocolo);
     }
 
 }
