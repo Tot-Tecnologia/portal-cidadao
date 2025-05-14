@@ -1,7 +1,8 @@
 package br.tec.tot.dardani.portal_cidadao.infrastructure.firebase.config;
 
-import java.io.InputStream;
+import java.io.FileInputStream;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import com.google.auth.oauth2.GoogleCredentials;
@@ -15,14 +16,14 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 public class FirebaseConfig {
 
+    @Value("${firebase.pathAccountKey}")
+    private String serviceAccountPath;
+
     @PostConstruct
     public void initialization() {
         try {
-            InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream("firebase/firebase-key.json");
-
-            if (serviceAccount == null) {
-                throw new RuntimeException("Chave do Firebase não encontrada no classpath.");
-            }
+            log.info("PATH {}", serviceAccountPath);
+            FileInputStream serviceAccount = new FileInputStream(serviceAccountPath);
 
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount))

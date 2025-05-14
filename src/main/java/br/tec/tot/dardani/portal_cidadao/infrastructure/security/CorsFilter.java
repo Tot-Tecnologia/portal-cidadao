@@ -41,7 +41,7 @@ public class CorsFilter extends OncePerRequestFilter {
 
             response.setStatus(HttpServletResponse.SC_OK);
         } else {
-            doFilter(request, response, filterChain);
+            filterChain.doFilter(request, response);
         }
 
     }
