@@ -70,7 +70,7 @@ public class ProtocoloController {
         return ResponseEntity.ok(buscarProtocoloUseCase.executar(numeroProtocolo));
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, path = "/{id}")
     public ResponseEntity<ProtocoloCriadoResponse> adicionarArquivosAoProtocolo(@PathVariable Long id,
             @ModelAttribute ArquivoRequest request) {
 
