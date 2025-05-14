@@ -28,7 +28,7 @@ CREATE TABLE protocolos (
     cpf_cnpj VARCHAR(14) NOT NULL,
     contato_email VARCHAR(100) NOT NULL,
     contato_telefone VARCHAR(11) NOT NULL,
-    descricao TEXT NOT NULL,
+    descricao TEXT,
     endereco_logradouro VARCHAR(100) NOT NULL,
     endereco_numero VARCHAR(10) NOT NULL,
     endereco_complemento VARCHAR(50),

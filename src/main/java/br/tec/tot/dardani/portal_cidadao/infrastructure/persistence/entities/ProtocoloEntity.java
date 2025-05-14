@@ -57,7 +57,7 @@ public class ProtocoloEntity {
     @Column(name = "tipo_documento", nullable = false)
     private Long tipoDocumento;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(columnDefinition = "TEXT")
     private String descricao;
 
     @Enumerated(EnumType.STRING)

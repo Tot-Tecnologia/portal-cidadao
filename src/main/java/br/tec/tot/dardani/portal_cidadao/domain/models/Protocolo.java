@@ -36,11 +36,11 @@ public final class Protocolo {
         this.id = id;
         this.numeroProtocolo = numeroProtocolo;
         this.nomeSolicitante = validarNomeSolicitante(nomeSolicitante);
-        this.descricao = validarDescricao(descricao);
         this.endereco = validarEndereco(endereco);
         this.contato = validarContato(contato);
         this.cpfCnpj = validarCpfCnpj(cpfCnpj);
         this.tipoDocumento = tipoDocumento;
+        this.descricao = descricao;
         this.status = status;
     }
 
@@ -82,24 +82,6 @@ public final class Protocolo {
         }
 
         return nomeTrimmed;
-    }
-
-    private String validarDescricao(String descricao) {
-        if (descricao == null || descricao.trim().isEmpty()) {
-            throw new DomainException("Descrição não pode ser nula ou vazia");
-        }
-
-        String descricaoTrimmed = descricao.trim();
-
-        if (descricaoTrimmed.length() < 10) {
-            throw new DomainException("Descrição deve ter pelo menos 10 caracteres");
-        }
-
-        if (descricaoTrimmed.length() > 500) {
-            throw new DomainException("Descrição deve ter no máximo 500 caracteres");
-        }
-
-        return descricaoTrimmed;
     }
 
     private Endereco validarEndereco(Endereco endereco) {
