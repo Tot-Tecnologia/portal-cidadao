@@ -1,10 +1,12 @@
 package br.tec.tot.dardani.portal_cidadao.application.gateway;
 
+import java.util.List;
 import java.util.Optional;
 
 import br.tec.tot.dardani.portal_cidadao.application.dtos.request.ProtocoloFiltrosRequest;
 import br.tec.tot.dardani.portal_cidadao.application.dtos.response.ConsultaResponse;
 import br.tec.tot.dardani.portal_cidadao.application.dtos.response.ProtocoloFiltroResponse;
+import br.tec.tot.dardani.portal_cidadao.domain.models.Arquivo;
 import br.tec.tot.dardani.portal_cidadao.domain.models.Protocolo;
 
 public interface ProtocoloGateway {
@@ -14,5 +16,7 @@ public interface ProtocoloGateway {
     ConsultaResponse<ProtocoloFiltroResponse> buscarProtocolos(ProtocoloFiltrosRequest parametros);
 
     Optional<Protocolo> buscarProtocoloPorId(String numeroProtocolo);
+
+    Protocolo adicionarArquivosAoProtocolo(List<Arquivo> arquivos, Long protocoloId);
 
 }

@@ -1,10 +1,5 @@
 package br.tec.tot.dardani.portal_cidadao.application.dtos.request;
 
-import java.util.Collection;
-import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProtocoloRequest {
+public class ProtocoloRequest extends ArquivoRequest {
 
     private String cpfCnpj;
     private String telefone;
@@ -30,12 +25,5 @@ public class ProtocoloRequest {
     private String descricao;
     private String cidade;
     private Long tipoDocumento;
-    private Collection<MultipartFile> arquivos;
 
-    public Collection<MultipartFile> getArquivos() {
-        if (arquivos == null) {
-            return List.of();
-        }
-        return arquivos;
-    }
 }

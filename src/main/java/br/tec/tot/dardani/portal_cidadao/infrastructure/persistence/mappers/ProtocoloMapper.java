@@ -59,7 +59,7 @@ public class ProtocoloMapper {
         }
     }
 
-    private List<ArquivoEntity> mapearListaArquivos(Collection<Arquivo> arquivos, ProtocoloEntity protocoloEntity) {
+    public List<ArquivoEntity> mapearListaArquivos(Collection<Arquivo> arquivos, ProtocoloEntity protocoloEntity) {
 
         if (arquivos == null) {
             return List.of();
