@@ -47,7 +47,7 @@ public class FirebaseSecurityFilter extends OncePerRequestFilter {
         try {
             String token = authHeader.substring(BEARER_PREFIX.length());
             FirebaseToken decodedToken = FirebaseAuth.getInstance().verifyIdToken(token);
-            var sessao = new Sessao(decodedToken.getUid(), decodedToken.getEmail());
+            var sessao = new Sessao(Long.valueOf(decodedToken.getUid()), decodedToken.getEmail());
             request.setAttribute(Sessao.KEY, sessao);
             filterChain.doFilter(request, response);
 

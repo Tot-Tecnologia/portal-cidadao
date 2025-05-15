@@ -15,12 +15,12 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class FirebaseRepository {
 
-    public Usuario criarUsuario(Usuario modelo) {
+    public Usuario criarUsuario(Usuario modelo, Long id) {
         try {
 
             log.debug("Executando criarUsuario ({})", modelo);
             var usuarioRequest = new UserRecord.CreateRequest()
-                    .setUid(modelo.getId().toString())
+                    .setUid(String.valueOf(id))
                     .setDisplayName(modelo.getNome())
                     .setEmail(modelo.getLogin())
                     .setEmailVerified(false)

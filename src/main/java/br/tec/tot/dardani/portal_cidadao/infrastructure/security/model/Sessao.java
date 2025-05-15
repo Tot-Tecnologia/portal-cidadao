@@ -5,11 +5,11 @@ import lombok.Getter;
 @Getter
 public final class Sessao {
     public static final String KEY = "SESSAO";
-    private final String uid;
+    private final Long uid;
     private final String login;
 
-    public Sessao(final String uid, final String login) {
-        this.uid = String.valueOf(uid);
+    public Sessao(final Long uid, final String login) {
+        this.uid = uid;
         this.login = login;
     }
 

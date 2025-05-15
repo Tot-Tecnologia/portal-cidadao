@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode
-public final class Arquivo {
+public class Arquivo {
 
     private static final String PDF_MIME_TYPE = "application/pdf";
     private static final String NOME_ORIGINAL_NULO = "Nome original não pode ser nulo";
@@ -21,29 +21,17 @@ public final class Arquivo {
     private final String mimeType;
     private final byte[] conteudo;
     private final Long tamanho;
-    private final TipoArquivoEnum tipoArquivo;
 
-    private Arquivo(Long id, String nomeOriginal, String mimeType, byte[] conteudo, Long tamanho,
-            TipoArquivoEnum tipoArquivo) {
+    public Arquivo(Long id, String nomeOriginal, String mimeType, byte[] conteudo, Long tamanho) {
         this.id = id;
         this.nomeOriginal = validarNomeOriginal(nomeOriginal);
         this.mimeType = validarMimeType(mimeType);
         this.conteudo = validarConteudo(conteudo);
         this.tamanho = validarTamanho(tamanho);
-        this.tipoArquivo = validarTipoArquivo(tipoArquivo);
     }
 
-    public static Arquivo criar(Long id, String nomeOriginal, String mimeType, byte[] conteudo, Long tamanho,
-            TipoArquivoEnum tipoArquivo) {
-        return new Arquivo(id, nomeOriginal, mimeType, conteudo, tamanho, tipoArquivo);
-    }
-
-    private TipoArquivoEnum validarTipoArquivo(TipoArquivoEnum tipoArquivo) {
-        if (tipoArquivo == null) {
-            throw new DomainException("Tipo do arquivo é obrigátorio");
-        }
-
-        return tipoArquivo;
+    public static Arquivo criar(Long id, String nomeOriginal, String mimeType, byte[] conteudo, Long tamanho) {
+        return new Arquivo(id, nomeOriginal, mimeType, conteudo, tamanho);
     }
 
     private String validarNomeOriginal(String nomeOriginal) {

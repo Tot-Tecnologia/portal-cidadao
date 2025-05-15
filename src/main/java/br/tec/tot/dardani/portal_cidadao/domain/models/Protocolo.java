@@ -19,20 +19,32 @@ public final class Protocolo {
     private final String descricao;
     private final String nomeSolicitante;
     private final String numeroProtocolo;
-    private final ProtocoloStatus status;
+    private final ProtocoloStatusEnum status;
     private final Long tipoDocumento;
-    private Collection<Arquivo> arquivos;
+
+    private List<Documento> documentos;
+    private List<Guia> guias;
+
+    private Usuario usuario;
 
     public Protocolo(CpfCnpj cpfCnpj, String nomeSolicitante, String descricao,
             Endereco endereco, Contato contato, Long tipoDocumento) {
 
         this(null, cpfCnpj, nomeSolicitante, descricao, gerarProtocolo(), endereco, contato,
-                ProtocoloStatus.EM_ANALISE, tipoDocumento);
+                ProtocoloStatusEnum.EM_ANALISE, tipoDocumento);
 
     }
 
-    public Protocolo(Long id, CpfCnpj cpfCnpj, String nomeSolicitante, String descricao, String numeroProtocolo,
-            Endereco endereco, Contato contato, ProtocoloStatus status, Long tipoDocumento) {
+    public Protocolo(
+            Long id,
+            CpfCnpj cpfCnpj,
+            String nomeSolicitante,
+            String descricao,
+            String numeroProtocolo,
+            Endereco endereco,
+            Contato contato,
+            ProtocoloStatusEnum status,
+            Long tipoDocumento) {
         this.id = id;
         this.numeroProtocolo = numeroProtocolo;
         this.nomeSolicitante = validarNomeSolicitante(nomeSolicitante);
@@ -44,18 +56,36 @@ public final class Protocolo {
         this.status = status;
     }
 
-    public Collection<Arquivo> getArquivos() {
-        if (this.arquivos == null) {
-            return List.of();
-        }
-        return this.arquivos;
+    public void atribuirProprietario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public void adicionarArquivo(Arquivo arquivo) {
-        if (this.arquivos == null) {
-            this.arquivos = new ArrayList<>();
+    public Collection<Guia> getGuias() {
+        if (this.guias == null) {
+            return List.of();
         }
-        this.arquivos.add(arquivo);
+        return this.guias;
+    }
+
+    public void adicionarDocumento(Documento documento) {
+        if (this.documentos == null) {
+            this.documentos = new ArrayList<>();
+        }
+        this.documentos.add(documento);
+    }
+
+    public List<Documento> getDocumentos() {
+        if (this.documentos == null) {
+            return List.of();
+        }
+        return this.documentos;
+    }
+
+    public void adicionarArquivo(Guia guia) {
+        if (this.guias == null) {
+            this.guias = new ArrayList<>();
+        }
+        this.guias.add(guia);
     }
 
     public boolean isNovo() {

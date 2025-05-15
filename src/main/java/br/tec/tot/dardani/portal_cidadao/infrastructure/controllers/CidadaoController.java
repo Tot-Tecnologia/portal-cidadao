@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.tec.tot.dardani.portal_cidadao.application.dtos.request.CidadaoRequest;
-import br.tec.tot.dardani.portal_cidadao.application.dtos.response.RespostaPadrao;
+import br.tec.tot.dardani.portal_cidadao.application.dtos.response.CidadaoCriadoResponse;
+import br.tec.tot.dardani.portal_cidadao.application.mappers.CidadaoMapper;
 import br.tec.tot.dardani.portal_cidadao.application.usecases.CriarCidadaoUseCase;
 import lombok.RequiredArgsConstructor;
 
@@ -18,17 +19,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CidadaoController {
 
-        private final CriarCidadaoUseCase criarCidadaoUseCase;
+	private final CidadaoMapper mapper;
+	private final CriarCidadaoUseCase criarCidadaoUseCase;
 
-        @PostMapping(path = "registrar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-        public ResponseEntity<RespostaPadrao> criarProtocolo(
-                        @RequestBody CidadaoRequest request) {
+	@PostMapping(path = "registrar", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<CidadaoCriadoResponse> criarProtocolo(
+			@RequestBody CidadaoRequest request) {
 
-                this.criarCidadaoUseCase.executar(request);
+		var dominio = mapper.toDomain(request);
 
-                return ResponseEntity
-                                .status(HttpStatus.CREATED)
-                                .body(RespostaPadrao.recursoCriado());
-        }
+		var response = this.criarCidadaoUseCase.executar(dominio);
+
+		return ResponseEntity
+				.status(HttpStatus.CREATED)
+				.body(response);
+	}
 
 }

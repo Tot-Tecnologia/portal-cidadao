@@ -3,16 +3,14 @@ package br.tec.tot.dardani.portal_cidadao.infrastructure.persistence.entities;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import br.tec.tot.dardani.portal_cidadao.domain.models.TipoArquivoEnum;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
@@ -20,15 +18,13 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Table(name = "arquivos")
 @Getter
 @Setter
-public class ArquivoEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "arquivos")
+@DiscriminatorColumn(name = "tipo_arquivo", discriminatorType = DiscriminatorType.STRING)
+public class ArquivoEntity extends BaseEntity {
 
     @Column(nullable = false, length = 100)
     private String nomeOriginal;
@@ -42,10 +38,6 @@ public class ArquivoEntity {
 
     @Column(nullable = false)
     private Long tamanho;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_arquivo", nullable = false)
-    private TipoArquivoEnum tipoArquivo;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "protocolo_id")

@@ -12,13 +12,21 @@ import lombok.Setter;
 @Setter
 public class ArquivoRequest {
 
-    private Collection<MultipartFile> arquivos;
+    private Collection<MultipartFile> documentos;
+    private Collection<MultipartFile> guias;
 
-    public Collection<MultipartFile> getArquivos() {
-        if (arquivos == null) {
+    public Collection<MultipartFile> getDocumentos() {
+        if (documentos == null) {
             return List.of();
         }
-        return arquivos;
+        return documentos;
+    }
+
+    public Collection<MultipartFile> getGuias() {
+        if (guias == null) {
+            return List.of();
+        }
+        return guias;
     }
 
 }

@@ -14,7 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public final class SessaoDataService {
+public final class SessaoService {
 
     private final PessoaJpaRepository repository;
 

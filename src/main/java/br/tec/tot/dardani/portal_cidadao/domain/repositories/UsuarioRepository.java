@@ -2,10 +2,10 @@ package br.tec.tot.dardani.portal_cidadao.domain.repositories;
 
 import java.util.Optional;
 
-import br.tec.tot.dardani.portal_cidadao.domain.models.Usuario;
+import br.tec.tot.dardani.portal_cidadao.infrastructure.persistence.entities.UsuarioEntity;
 
 public interface UsuarioRepository {
 
-    Optional<Usuario> buscarPessoa(String email, String cpfCnpj);
+    Optional<UsuarioEntity> buscarUsuario(String email, String cpfCnpj);
 
 }

@@ -10,4 +10,12 @@ public final class Cidadao extends Usuario {
         super(null, nome, senha, login, documento, contato);
     }
 
+    public String getEmail() {
+        return this.getContato().getEmail();
+    }
+
+    public String getCpfCnpj() {
+        return this.getDocumento().getValor();
+    }
+
 }

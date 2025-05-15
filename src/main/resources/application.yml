@@ -35,17 +35,6 @@ spring:
           lob:
             non_contextual_creation: true
 
-  flyway:
-    url: ${SPRING_DATASOURCE_URL}
-    user: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
-    schemas: ${SPRING_DB_NAME}
-    locations: classpath:db/migration
-    enabled: true
-    baseline-on-migrate: true
-    table: flyway_schema_history
-    validate-on-migrate: true
-
 server:
   servlet:
     context-path: "/@project.artifactId@"

@@ -1,9 +1,9 @@
 package br.tec.tot.dardani.portal_cidadao.domain.repositories;
 
-import br.tec.tot.dardani.portal_cidadao.domain.models.Cidadao;
+import br.tec.tot.dardani.portal_cidadao.infrastructure.persistence.entities.CidadaoEntity;
 
 public interface CidadaoRepository {
 
-    Cidadao salvar(Cidadao modelo);
+    CidadaoEntity salvar(CidadaoEntity entity);
 
 }

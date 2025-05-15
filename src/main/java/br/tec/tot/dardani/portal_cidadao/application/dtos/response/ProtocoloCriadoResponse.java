@@ -2,8 +2,8 @@ package br.tec.tot.dardani.portal_cidadao.application.dtos.response;
 
 import java.util.Collection;
 
-import br.tec.tot.dardani.portal_cidadao.domain.models.Protocolo;
 import br.tec.tot.dardani.portal_cidadao.domain.models.TipoDocumento;
+import br.tec.tot.dardani.portal_cidadao.infrastructure.persistence.entities.ProtocoloEntity;
 import lombok.Getter;
 
 @Getter
@@ -27,47 +27,57 @@ public class ProtocoloCriadoResponse {
     private Long tipoDocumentoId;
     private String statusTexto;
     private String statusEnum;
-    private Collection<ArquivoCriadoResponse> arquivos;
+    private Collection<ArquivoCriadoResponse> documentos;
+    private Collection<GuiaCriadaResponse> guias;
 
-    public static ProtocoloCriadoResponse fromModel(Protocolo protocolo) {
+    public static ProtocoloCriadoResponse fromEntity(ProtocoloEntity entity) {
         var response = new ProtocoloCriadoResponse();
 
-        response.id = protocolo.getId();
-        response.descricao = protocolo.getDescricao();
+        response.id = entity.getId();
+        response.descricao = entity.getDescricao();
 
-        response.statusEnum = protocolo.getStatus().name();
-        response.statusTexto = protocolo.getStatus().getDescricao();
+        response.statusEnum = entity.getStatus().name();
+        response.statusTexto = entity.getStatus().getDescricao();
 
-        response.cep = protocolo.getEndereco().getCep().getValor();
-        response.cpfCnpj = protocolo.getCpfCnpj().getValor();
+        response.cep = entity.getEndereco().getCep();
+        response.cpfCnpj = entity.getCpfCnpj();
 
-        response.numero = protocolo.getEndereco().getLocalizacao().getNumero();
-        response.bairro = protocolo.getEndereco().getLocalizacao().getBairro();
-        response.logradouro = protocolo.getEndereco().getLocalizacao().getLogradouro();
-        response.complemento = protocolo.getEndereco().getLocalizacao().getComplemento();
+        response.numero = entity.getEndereco().getNumero();
+        response.bairro = entity.getEndereco().getBairro();
+        response.logradouro = entity.getEndereco().getLogradouro();
+        response.complemento = entity.getEndereco().getComplemento();
 
-        response.nomeSolicitante = protocolo.getNomeSolicitante();
-        response.numeroProtocolo = protocolo.getNumeroProtocolo();
+        response.nomeSolicitante = entity.getNomeSolicitante();
+        response.numeroProtocolo = entity.getNumeroProtocolo();
 
-        response.tipoDocumentoTexto = tipoDocumento(protocolo);
-        response.tipoDocumentoId = protocolo.getTipoDocumento();
+        response.tipoDocumentoTexto = tipoDocumento(entity.getTipoDocumento());
+        response.tipoDocumentoId = entity.getTipoDocumento();
 
-        response.email = protocolo.getContato().getEmail();
-        response.estado = protocolo.getEndereco().getCidadeEstado().getCidade();
-        response.cidade = protocolo.getEndereco().getCidadeEstado().getEstado();
-        response.telefone = protocolo.getContato().getTelefone();
+        response.email = entity.getContato().getEmail();
+        response.estado = entity.getEndereco().getCidade();
+        response.cidade = entity.getEndereco().getEstado();
+        response.telefone = entity.getContato().getTelefone();
 
-        response.arquivos = protocolo.getArquivos().stream()
+        response.documentos = entity.getDocumentos().stream()
                 .map((arq) -> new ArquivoCriadoResponse(arq.getId(), arq.getNomeOriginal())).toList();
+
+        response.guias = entity.getGuias().stream()
+                .map((arq) -> new GuiaCriadaResponse(
+                        arq.getId(),
+                        arq.getNomeOriginal(),
+                        arq.getStatus().name(),
+                        arq.getDataPagamento(),
+                        arq.getCriadoEm()))
+                .toList();
 
         return response;
 
     }
 
-    private static String tipoDocumento(Protocolo protocolo) {
+    private static String tipoDocumento(Long tipoDocumentoId) {
 
         return TipoDocumento.buscarDocumentos().stream()
-                .filter(td -> td.getId().equals(protocolo.getTipoDocumento()))
+                .filter(td -> td.getId().equals(tipoDocumentoId))
                 .findFirst().get().getNome();
     }
 
