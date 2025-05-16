@@ -71,7 +71,7 @@ public class ProtocoloController {
 
     @PatchMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, path = "/documentos/{id}")
     public ResponseEntity<ProtocoloCriadoResponse> adicionarArquivosAoProtocolo(@PathVariable Long id,
-            @ModelAttribute ArquivoRequest request) {
+            @Valid @ModelAttribute ArquivoRequest request) {
 
         var response = this.adicionarDocumentosUseCase.executar(request, id);
 
@@ -80,7 +80,7 @@ public class ProtocoloController {
 
     @PatchMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE, path = "/guias/{id}")
     public ResponseEntity<ProtocoloCriadoResponse> adicionarGuiasAoProtocolo(@PathVariable Long id,
-            @ModelAttribute ArquivoRequest request) {
+            @Valid @ModelAttribute ArquivoRequest request) {
 
         var response = this.adicionarGuiasUseCase.executar(request, id);
 
