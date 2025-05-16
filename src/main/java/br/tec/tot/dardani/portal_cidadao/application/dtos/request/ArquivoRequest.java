@@ -13,11 +13,11 @@ import lombok.Setter;
 @Setter
 public class ArquivoRequest {
 
-    @FileListSize(fileSize = 2 * 1024 * 1024, maxFilesSize = 15 * 1024 * 1024, allowedExtensions = {
+    @FileListSize(fileSize = 2 * 1024 * 1024, maxFilesSize = 15, allowedExtensions = {
             "application/pdf" })
     private Collection<MultipartFile> documentos;
 
-    @FileListSize(fileSize = 2 * 1024 * 1024, maxFilesSize = 15 * 1024 * 1024, allowedExtensions = {
+    @FileListSize(fileSize = 2 * 1024 * 1024, maxFilesSize = 15, allowedExtensions = {
             "application/pdf" })
     private Collection<MultipartFile> guias;
 
