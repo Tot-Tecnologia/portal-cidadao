@@ -1,6 +1,6 @@
 package br.tec.tot.dardani.portal_cidadao.application.dtos.response;
 
-import br.tec.tot.dardani.portal_cidadao.infrastructure.persistence.entities.CidadaoEntity;
+import br.tec.tot.dardani.portal_cidadao.infrastructure.data.persistence.entities.CidadaoEntity;
 import lombok.Getter;
 
 @Getter

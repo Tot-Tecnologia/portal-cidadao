@@ -1,6 +1,5 @@
 package br.tec.tot.dardani.portal_cidadao.application.dtos.request;
 
-import br.tec.tot.dardani.portal_cidadao.application.domain.Paginacao;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProtocoloFiltrosRequest extends Paginacao {
+public class ProtocoloFiltrosRequest extends PaginacaoRequest {
 
 	private Integer ano;
 	private Long tipoDocumento;

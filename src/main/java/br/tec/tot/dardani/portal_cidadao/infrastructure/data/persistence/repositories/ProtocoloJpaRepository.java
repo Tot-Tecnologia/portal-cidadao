@@ -1,0 +1,27 @@
+package br.tec.tot.dardani.portal_cidadao.infrastructure.data.persistence.repositories;
+
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import br.tec.tot.dardani.portal_cidadao.application.dtos.request.ProtocoloFiltrosRequest;
+import br.tec.tot.dardani.portal_cidadao.infrastructure.data.persistence.entities.ProtocoloEntity;
+import br.tec.tot.dardani.portal_cidadao.infrastructure.data.persistence.repositories.specifications.ProtocoloSpecifications;
+
+@Repository
+public interface ProtocoloJpaRepository
+        extends JpaRepository<ProtocoloEntity, Long>, JpaSpecificationExecutor<ProtocoloEntity> {
+
+    @Query("SELECT p FROM ProtocoloEntity p WHERE p.numeroProtocolo = :numeroProtocolo")
+    Optional<ProtocoloEntity> findByNumeroProtocolo(@Param("numeroProtocolo") String numeroProtocolo);
+
+    default Page<ProtocoloEntity> consultarProtocolos(ProtocoloFiltrosRequest filtros, Pageable pageable) {
+        return findAll(ProtocoloSpecifications.consultarProtocolos(filtros), pageable);
+    }
+}

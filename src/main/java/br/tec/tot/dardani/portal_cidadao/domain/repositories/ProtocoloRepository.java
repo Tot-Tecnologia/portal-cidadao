@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 
 import br.tec.tot.dardani.portal_cidadao.application.dtos.request.ProtocoloFiltrosRequest;
-import br.tec.tot.dardani.portal_cidadao.infrastructure.persistence.entities.ProtocoloEntity;
+import br.tec.tot.dardani.portal_cidadao.infrastructure.data.persistence.entities.ProtocoloEntity;
 
 public interface ProtocoloRepository {
 

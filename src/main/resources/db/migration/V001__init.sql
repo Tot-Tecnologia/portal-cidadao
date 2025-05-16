@@ -58,7 +58,6 @@ CREATE TABLE protocolos (
 
     CONSTRAINT pk_protocolos PRIMARY KEY (id),
     CONSTRAINT uk_protocolos_numero_protocolo UNIQUE (numero_protocolo),
-    CONSTRAINT uk_protocolos_contato_email UNIQUE (contato_email),
     CONSTRAINT fk_protocolos_pessoa_id FOREIGN KEY (pessoa_id) REFERENCES pessoas(id),
     CONSTRAINT chk_protocolos_status CHECK (protocolo_status IN ('ABERTO','EM_ANALISE','APROVADO','REJEITADO'))
 );

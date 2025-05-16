@@ -2,8 +2,8 @@ package br.tec.tot.dardani.portal_cidadao.application.dtos.response;
 
 import java.time.LocalDateTime;
 
-import br.tec.tot.dardani.portal_cidadao.domain.models.TipoDocumento;
-import br.tec.tot.dardani.portal_cidadao.infrastructure.persistence.entities.ProtocoloEntity;
+import br.tec.tot.dardani.portal_cidadao.infrastructure.data.persistence.entities.ProtocoloEntity;
+import br.tec.tot.dardani.portal_cidadao.infrastructure.http.domain.TipoDocumento;
 import lombok.Getter;
 
 @Getter
@@ -28,7 +28,7 @@ public class ProtocoloFiltroResponse {
                 .filter(td -> td.getId().equals(entity.getTipoDocumento())).findFirst().get().getNome();
         response.dataSolicitacao = entity.getCriadoEm();
         response.statusEnum = entity.getStatus().name();
-        response.statusTexto = entity.getStatus().getDescricao();
+        response.statusTexto = entity.getStatus().name();
 
         return response;
     }
