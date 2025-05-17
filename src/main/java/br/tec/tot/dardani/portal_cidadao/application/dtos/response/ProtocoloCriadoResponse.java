@@ -57,7 +57,8 @@ public class ProtocoloCriadoResponse {
 		response.telefone = entity.getContato().getTelefone();
 
 		response.documentos = entity.getDocumentos().stream()
-				.map((arq) -> new ArquivoCriadoResponse(arq.getId(), arq.getNomeOriginal())).toList();
+				.map((arq) -> new ArquivoCriadoResponse(arq.getId(), arq.getNomeOriginal(), arq.getCriadoEm()))
+				.toList();
 
 		response.guias = entity.getGuias().stream()
 				.map((arq) -> new GuiaCriadaResponse(
