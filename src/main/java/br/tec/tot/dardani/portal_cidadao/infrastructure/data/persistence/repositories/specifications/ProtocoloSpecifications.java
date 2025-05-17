@@ -39,6 +39,10 @@ public class ProtocoloSpecifications {
                 predicates.add(cb.equal(root.get("tipoDocumento"), filtros.getTipoDocumento()));
             }
 
+            if (Strings.isNotBlank(filtros.getCpfCnpj())) {
+                predicates.add(cb.equal(root.get("cpfCnpj"), filtros.getCpfCnpj()));
+            }
+
             return cb.and(predicates.toArray(new Predicate[0]));
         };
     }

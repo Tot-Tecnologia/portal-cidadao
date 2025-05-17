@@ -14,5 +14,6 @@ public class ProtocoloFiltrosRequest extends PaginacaoRequest {
 	private Integer ano;
 	private Long tipoDocumento;
 	private String numeroProtocolo;
+	private String cpfCnpj;
 
 }
