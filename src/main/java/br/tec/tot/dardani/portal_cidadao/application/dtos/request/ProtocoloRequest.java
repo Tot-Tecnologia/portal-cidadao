@@ -46,7 +46,7 @@ public class ProtocoloRequest extends ArquivoRequest {
     private String email;
     @NotBlank
     private String complemento;
-    @NotBlank
+    
     private String descricao;
     @NotBlank
     private String cidade;
