@@ -14,8 +14,7 @@ public class ProtocoloFiltroResponse {
     private Long tipoDocumento;
     private String tipoDocumentoTexto;
     private LocalDateTime dataSolicitacao;
-    private String statusEnum;
-    private String statusTexto;
+    private String status;
 
     public static ProtocoloFiltroResponse fromEntity(ProtocoloEntity entity) {
 
@@ -27,8 +26,7 @@ public class ProtocoloFiltroResponse {
         response.tipoDocumentoTexto = TipoDocumento.buscarDocumentos().stream()
                 .filter(td -> td.getId().equals(entity.getTipoDocumento())).findFirst().get().getNome();
         response.dataSolicitacao = entity.getCriadoEm();
-        response.statusEnum = entity.getStatus().name();
-        response.statusTexto = entity.getStatus().name();
+        response.status = entity.getStatus().name();
 
         return response;
     }

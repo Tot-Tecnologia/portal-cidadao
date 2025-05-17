@@ -25,8 +25,7 @@ public class ProtocoloCriadoResponse {
 	private String cidade;
 	private String tipoDocumentoTexto;
 	private Long tipoDocumentoId;
-	private String statusTexto;
-	private String statusEnum;
+	private String status;
 	private Collection<ArquivoCriadoResponse> documentos;
 	private Collection<GuiaCriadaResponse> guias;
 
@@ -36,8 +35,7 @@ public class ProtocoloCriadoResponse {
 		response.id = entity.getId();
 		response.descricao = entity.getDescricao();
 
-		response.statusEnum = entity.getStatus().name();
-		response.statusTexto = entity.getStatus().name();
+		response.status = entity.getStatus().name();
 
 		response.cep = entity.getEndereco().getCep();
 		response.cpfCnpj = entity.getCpfCnpj();
